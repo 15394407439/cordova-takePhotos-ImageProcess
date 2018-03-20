@@ -1,24 +1,9 @@
-ImageProcess 插件说明
-====================
-
-导出的类名ImageProcess
---------------------
-
-* openCamera 方法说明 调用自定义相机并裁剪、二值处理
-- ImageProcess.openCamera(savedFilePath,success,error)
-    savedFilePath : 要保存的文件路径 可为空
-    success       : 成功回调方法，返回string类型的文件路径
-    error         : 失败回调方法，返回string类型错误提示
-
-* openAlbum 方法说明 调用系统相册选择图片后并裁剪、二值处理(仅android)
-- ImageProcess.openAlbum(savedFilePath,success,error)
-    savedFilePath : 要保存的文件路径 可为空
-    success       : 成功回调方法，返回string类型的文件路径
-    error         : 失败回调方法，返回string类型错误提示
-    
-* openCrop 方法说明 对指定图片进行调用裁剪、二值处理
-- ImageProcess.openCrop(savedFilePath,selectFilePath,success,error)
-    savedFilePath  : 要保存的文件路径 可为空
-    selectFilePath : 需裁剪、二值处理的图片路径 不可为空
-    success        : 成功回调方法，返回string类型的文件路径
-    error          : 失败回调方法，返回string类型错误提示
+openCamera 方法说明 调用自定义相机并裁剪、二值处理 
+ImageProcess.openCamera()
+//注意 ：在调用这个拍照方法，要传入这些参数 this.srcType = CAMERA;
+this.destType = FILE_URI; this.saveToPhotoAlbum = false //是否保存到相册 this.targetHeight = 600; //拍照图片的高度 this.targetWidth = 800; //拍照图片的宽度 this.encodingType = JPEG;
+this.mediaType = PICTURE; this.mQuality = 50; this.allowEdit = true; //这个是设置是否裁剪图片，true代表默认裁剪
+openAlbum 方法说明 调用系统相册选择图片后并裁剪、二值处理(仅android) 
+ImageProcess.openAlbum() //注意这个方法是调用系统相册，具体情况具体调用 
+openCrop 方法说明 对指定图片进行调用裁剪、二值处理 
+ImageProcess.openCrop() 
