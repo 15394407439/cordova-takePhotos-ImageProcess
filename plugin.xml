@@ -1,0 +1,728 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-image-process" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>ImageProcess</name>
+    <repo>http://192.168.1.254/hetong/cordova-plugin-image-process.git</repo>
+    <js-module name="ImageProcess" src="www/ImageProcess.js">
+        <clobbers target="ImageProcess"/>
+    </js-module>
+    <platform name="android">
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="ImageProcess">
+                <param name="android-package" value="com.qxcloud.imageprocess.ImageProcess"/>
+            </feature>
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml">
+            <uses-permission android:name="android.permission.CAMERA"/>
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+            <uses-feature android:name="android.hardware.camera.autofocus" />
+        </config-file>
+        <config-file parent="/manifest/application" target="AndroidManifest.xml">
+            <activity android:name="com.qxcloud.imageprocess.activity.TakePhotoActivity"
+                      android:screenOrientation="landscape"
+                      android:launchMode="singleTask">
+                <intent-filter>
+                    <action android:name="com.qxcloud.imageprocess.activity.TakePhotoActivity" />
+
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+            </activity>
+            <activity android:name="com.qxcloud.imageprocess.activity.newCamera.NewTackPhotoActivity"
+                      android:screenOrientation="landscape"
+                      android:launchMode="singleTask">
+                <intent-filter>
+                    <action android:name="com.qxcloud.imageprocess.activity.newCamera.NewTackPhotoActivity" />
+
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+            </activity>
+            <activity android:name="com.qxcloud.imageprocess.activity.CropImgActivity"
+                 
+                      android:launchMode="singleTask">
+                <intent-filter>
+                    <action android:name="com.qxcloud.imageprocess.activity.CropImgActivity" />
+
+                    <category android:name="android.intent.category.DEFAULT" />
+                </intent-filter>
+            </activity>
+			
+        </config-file>
+		
+        <source-file src="src/android/ImageProcess.java"
+                     target-dir="src/com/qxcloud/imageprocess"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/ResourceUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/ToastUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess"/>
+					 
+		<source-file src="src/android/CordovaUri.java"
+                     target-dir="src/com/qxcloud/imageprocess"/>
+		 <source-file src="src/android/ExifHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess"/>			 
+		 <source-file src="src/android/FileHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess"/>
+					 
+        <!--activity-->
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/BitmapTransfer.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/CropImgActivity.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/TakePhotoActivity.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity"/>
+        <!--activity newCamera-->
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/newCamera/CameraHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity/newCamera"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/newCamera/CameraOpenCallBack.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity/newCamera"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/newCamera/MaskSurfaceView.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity/newCamera"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/newCamera/NewTackPhotoActivity.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity/newCamera"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/activity/newCamera/OnCaptureCallback.java"
+                     target-dir="src/com/qxcloud/imageprocess/activity/newCamera"/>
+        <!--crop-->
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/AspectRatioUtil.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/CenterHandleHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/CornerHandleHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/CropImageType.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/CropImageView.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/CropOverlayView.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/Edge.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/EdgePair.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/Handle.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/HandleHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/HandleUtil.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/HorizontalHandleHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/ImageViewUtil.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/PaintUtil.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/crop/VerticalHandleHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess/crop"/>
+        <!--editAPI-->
+        <source-file src="src/android/com/qxcloud/imageprocess/editAPI/EditImageAPI.java"
+                     target-dir="src/com/qxcloud/imageprocess/editAPI"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/editAPI/EditImageMessage.java"
+                     target-dir="src/com/qxcloud/imageprocess/editAPI"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/editAPI/EditImgInterface.java"
+                     target-dir="src/com/qxcloud/imageprocess/editAPI"/>
+        <!--operate-->
+        <source-file src="src/android/com/qxcloud/imageprocess/operate/CameraView.java"
+                     target-dir="src/com/qxcloud/imageprocess/operate"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/operate/FocusView.java"
+                     target-dir="src/com/qxcloud/imageprocess/operate"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/operate/JavaCameraView.java"
+                     target-dir="src/com/qxcloud/imageprocess/operate"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/operate/ReferenceLine.java"
+                     target-dir="src/com/qxcloud/imageprocess/operate"/>
+        <!--utils-->
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/CameraHelper.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/CameraUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/FileUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/ImageUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/LittleUtil.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/Logger.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/MyBitmapFactory.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/OpenCVUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/PhotoUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/URIUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <source-file src="src/android/com/qxcloud/imageprocess/utils/PermissionUtils.java"
+                     target-dir="src/com/qxcloud/imageprocess/utils"/>
+        <!--opencv android-->
+        <source-file src="src/android/org/opencv/android/AsyncServiceHelper.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/BaseLoaderCallback.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/Camera2Renderer.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/CameraBridgeViewBase.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/CameraGLRendererBase.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/CameraGLSurfaceView.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/CameraRenderer.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/FpsMeter.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/InstallCallbackInterface.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/JavaCameraView.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/LoaderCallbackInterface.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/OpenCVLoader.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/StaticHelper.java"
+                     target-dir="src/org/opencv/android"/>
+        <source-file src="src/android/org/opencv/android/Utils.java"
+                     target-dir="src/org/opencv/android"/>
+
+        <!--opencv calib3d-->
+        <source-file src="src/android/org/opencv/calib3d/Calib3d.java"
+                     target-dir="src/org/opencv/calib3d"/>
+        <source-file src="src/android/org/opencv/calib3d/StereoBM.java"
+                     target-dir="src/org/opencv/calib3d"/>
+        <source-file src="src/android/org/opencv/calib3d/StereoMatcher.java"
+                     target-dir="src/org/opencv/calib3d"/>
+        <source-file src="src/android/org/opencv/calib3d/StereoSGBM.java"
+                     target-dir="src/org/opencv/calib3d"/>
+
+        <!--opencv core-->
+        <source-file src="src/android/org/opencv/core/Algorithm.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Core.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/CvException.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/CvType.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/DMatch.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/KeyPoint.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Mat.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfByte.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfDMatch.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfDouble.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfFloat.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfFloat4.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfFloat6.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfInt.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfInt4.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfKeyPoint.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfPoint.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfPoint2f.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfPoint3.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfPoint3f.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfRect.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/MatOfRect2d.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Point.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Point3.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Range.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Rect.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Rect2d.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/RotatedRect.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Scalar.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/Size.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/TermCriteria.java"
+                     target-dir="src/org/opencv/core"/>
+        <source-file src="src/android/org/opencv/core/TickMeter.java"
+                     target-dir="src/org/opencv/core"/>
+
+        <!--opencv dnn-->
+        <source-file src="src/android/org/opencv/dnn/DictValue.java"
+                     target-dir="src/org/opencv/dnn"/>
+        <source-file src="src/android/org/opencv/dnn/Dnn.java"
+                     target-dir="src/org/opencv/dnn"/>
+        <source-file src="src/android/org/opencv/dnn/Importer.java"
+                     target-dir="src/org/opencv/dnn"/>
+        <source-file src="src/android/org/opencv/dnn/Layer.java"
+                     target-dir="src/org/opencv/dnn"/>
+        <source-file src="src/android/org/opencv/dnn/Net.java"
+                     target-dir="src/org/opencv/dnn"/>
+
+        <!--opencv features2d-->
+        <source-file src="src/android/org/opencv/features2d/AgastFeatureDetector.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/AKAZE.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/BFMatcher.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/BOWImgDescriptorExtractor.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/BOWKMeansTrainer.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/BOWTrainer.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/BRISK.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/DescriptorExtractor.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/DescriptorMatcher.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/FastFeatureDetector.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/Feature2D.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/FeatureDetector.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/Features2d.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/FlannBasedMatcher.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/GFTTDetector.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/KAZE.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/MSER.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/ORB.java"
+                     target-dir="src/org/opencv/features2d"/>
+        <source-file src="src/android/org/opencv/features2d/Params.java"
+                     target-dir="src/org/opencv/features2d"/>
+
+        <!--opencv imgcodecs-->
+        <source-file src="src/android/org/opencv/imgcodecs/Imgcodecs.java"
+                     target-dir="src/org/opencv/imgcodecs"/>
+
+        <!--opencv imgproc-->
+        <source-file src="src/android/org/opencv/imgproc/CLAHE.java"
+                     target-dir="src/org/opencv/imgproc"/>
+        <source-file src="src/android/org/opencv/imgproc/Imgproc.java"
+                     target-dir="src/org/opencv/imgproc"/>
+        <source-file src="src/android/org/opencv/imgproc/LineSegmentDetector.java"
+                     target-dir="src/org/opencv/imgproc"/>
+        <source-file src="src/android/org/opencv/imgproc/Moments.java"
+                     target-dir="src/org/opencv/imgproc"/>
+        <source-file src="src/android/org/opencv/imgproc/Subdiv2D.java"
+                     target-dir="src/org/opencv/imgproc"/>
+
+        <!--opencv ml-->
+        <source-file src="src/android/org/opencv/ml/ANN_MLP.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/Boost.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/DTrees.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/EM.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/KNearest.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/LogisticRegression.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/Ml.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/NormalBayesClassifier.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/ParamGrid.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/RTrees.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/StatModel.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/SVM.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/SVMSGD.java"
+                     target-dir="src/org/opencv/ml"/>
+        <source-file src="src/android/org/opencv/ml/TrainData.java"
+                     target-dir="src/org/opencv/ml"/>
+
+        <!--opencv objdetect-->
+        <source-file src="src/android/org/opencv/objdetect/BaseCascadeClassifier.java"
+                     target-dir="src/org/opencv/objdetect"/>
+        <source-file src="src/android/org/opencv/objdetect/CascadeClassifier.java"
+                     target-dir="src/org/opencv/objdetect"/>
+        <source-file src="src/android/org/opencv/objdetect/HOGDescriptor.java"
+                     target-dir="src/org/opencv/objdetect"/>
+        <source-file src="src/android/org/opencv/objdetect/Objdetect.java"
+                     target-dir="src/org/opencv/objdetect"/>
+
+        <!--opencv osgi-->
+        <source-file src="src/android/org/opencv/osgi/OpenCVInterface.java"
+                     target-dir="src/org/opencv/osgi"/>
+        <source-file src="src/android/org/opencv/osgi/OpenCVNativeLoader.java"
+                     target-dir="src/org/opencv/osgi"/>
+
+        <!--opencv photo-->
+        <source-file src="src/android/org/opencv/photo/AlignExposures.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/AlignMTB.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/CalibrateCRF.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/CalibrateDebevec.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/CalibrateRobertson.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/MergeDebevec.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/MergeExposures.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/MergeMertens.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/MergeRobertson.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/Photo.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/Tonemap.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/TonemapDrago.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/TonemapDurand.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/TonemapMantiuk.java"
+                     target-dir="src/org/opencv/photo"/>
+        <source-file src="src/android/org/opencv/photo/TonemapReinhard.java"
+                     target-dir="src/org/opencv/photo"/>
+
+        <!--opencv utils-->
+        <source-file src="src/android/org/opencv/utils/Converters.java"
+                     target-dir="src/org/opencv/utils"/>
+
+        <!--opencv video-->
+        <source-file src="src/android/org/opencv/video/BackgroundSubtractor.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/BackgroundSubtractorKNN.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/BackgroundSubtractorMOG2.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/DenseOpticalFlow.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/DualTVL1OpticalFlow.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/FarnebackOpticalFlow.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/KalmanFilter.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/SparseOpticalFlow.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/SparsePyrLKOpticalFlow.java"
+                     target-dir="src/org/opencv/video"/>
+        <source-file src="src/android/org/opencv/video/Video.java"
+                     target-dir="src/org/opencv/video"/>
+        <!--opencv videoio-->
+        <source-file src="src/android/org/opencv/videoio/VideoCapture.java"
+                     target-dir="src/org/opencv/videoio"/>
+        <source-file src="src/android/org/opencv/videoio/Videoio.java"
+                     target-dir="src/org/opencv/videoio"/>
+        <source-file src="src/android/org/opencv/videoio/VideoWriter.java"
+                     target-dir="src/org/opencv/videoio"/>
+
+        <!--opencv aidl-->
+        <source-file src="src/android/aidl/org/opencv/engine/OpenCVEngineInterface.aidl"
+                     target-dir="src/aidl/org/opencv/engine"/>
+        <!--opencv libs arm64-v8a-->
+        <source-file src="src/android/libs/arm64-v8a/libopencv_calib3d.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_core.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_dnn.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_features2d.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_flann.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_highgui.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_imgcodecs.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_imgproc.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_java3.so"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_ml.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_objdetect.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_photo.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_shape.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_stitching.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_superres.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_video.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_videoio.a"
+                     target-dir="libs/arm64-v8a"/>
+        <source-file src="src/android/libs/arm64-v8a/libopencv_videostab.a"
+                     target-dir="libs/arm64-v8a"/>
+
+        <!--opencv libs armeabi-->
+        <source-file src="src/android/libs/armeabi/libopencv_calib3d.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_core.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_dnn.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_features2d.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_flann.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_highgui.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_imgcodecs.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_imgproc.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_java3.so"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_ml.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_objdetect.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_photo.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_shape.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_stitching.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_superres.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_video.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_videoio.a"
+                     target-dir="libs/armeabi"/>
+        <source-file src="src/android/libs/armeabi/libopencv_videostab.a"
+                     target-dir="libs/armeabi"/>
+
+        <!--opencv libs armeabi-v7a-->
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_calib3d.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_core.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_dnn.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_features2d.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_flann.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_highgui.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_imgcodecs.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_imgproc.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_java3.so"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_ml.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_objdetect.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_photo.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_shape.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_stitching.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_superres.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_video.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_videoio.a"
+                     target-dir="libs/armeabi-v7a"/>
+        <source-file src="src/android/libs/armeabi-v7a/libopencv_videostab.a"
+                     target-dir="libs/armeabi-v7a"/>
+
+        <!--res drawable-->
+        <source-file src="src/android/res/drawable/flash_lamp_style.xml"
+                     target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/ic_close_selector.xml"
+                     target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/ic_flashlight_selector.xml"
+                     target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/ic_left_selector.xml"
+                     target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/ic_marquee_selector.xml"
+                     target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/ic_rotate_selector.xml"
+                     target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/ic_takephoto_btn.xml"
+                     target-dir="res/drawable"/>
+        <source-file src="src/android/res/drawable/txst_prompt_bg.xml"
+                     target-dir="res/drawable"/>
+        <!--res drawable-hdpi-->
+        <source-file src="src/android/res/drawable-hdpi/crop_button.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/marquee_btn_back_normal.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/marquee_btn_back_pre.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/marquee_btn_back_prebtn_rotate_normal.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/marquee_btn_back_prebtn_rotate_pre.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/marquee_btn_ok_normal.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/marquee_btn_ok_pre.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/takepic_btn_close_normal.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/takepic_btn_lightoff.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/takepic_btn_lighton.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/takepic_btn_open_pre.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/takepic_btn_takepic_normal.png"
+                     target-dir="res/drawable-hdpi"/>
+        <source-file src="src/android/res/drawable-hdpi/takepic_btn_takepic_pre.png"
+                     target-dir="res/drawable-hdpi"/>
+        <!--res drawable-mdpi-->
+        <source-file src="src/android/res/drawable-mdpi/adjust_btn_save_normal.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/adjust_btn_save_pre.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/marquee_btn_back_normal.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/marquee_btn_back_pre.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/marquee_btn_back_prebtn_rotate_normal.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/marquee_btn_back_prebtn_rotate_pre.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/marquee_btn_ok_normal.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/marquee_btn_ok_pre.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/takepic_btn_close_normal.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/takepic_btn_lightoff.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/takepic_btn_lighton.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/takepic_btn_open_pre.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/takepic_btn_takepic_normal.png"
+                     target-dir="res/drawable-mdpi"/>
+        <source-file src="src/android/res/drawable-mdpi/takepic_btn_takepic_pre.png"
+                     target-dir="res/drawable-mdpi"/>
+
+        <!--drawable-xhdpi-->
+        <source-file src="src/android/res/drawable-xhdpi/marquee_btn_back_normal.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/marquee_btn_back_pre.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/marquee_btn_back_prebtn_rotate_normal.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/marquee_btn_back_prebtn_rotate_pre.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/marquee_btn_ok_normal.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/marquee_btn_ok_pre.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/takepic_btn_close_normal.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/takepic_btn_lightoff.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/takepic_btn_lighton.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/takepic_btn_open_pre.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/takepic_btn_takepic_normal.png"
+                     target-dir="res/drawable-xhdpi"/>
+        <source-file src="src/android/res/drawable-xhdpi/takepic_btn_takepic_pre.png"
+                     target-dir="res/drawable-xhdpi"/>
+
+        <!--drawable-xxhdpi-->
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_back_normal.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_back_pre.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_back_prebtn_rotate_normal.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_back_prebtn_rotate_pre.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_ok_normal.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_ok_pre.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/takepic_btn_close_normal.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/takepic_btn_lightoff.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/takepic_btn_lighton.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/takepic_btn_open_pre.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/takepic_btn_takepic_normal.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/takepic_btn_takepic_pre.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_back_prebtn_rotate_normal_new.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <source-file src="src/android/res/drawable-xxhdpi/marquee_btn_retake_normal.png"
+                     target-dir="res/drawable-xxhdpi"/>
+        <!--drawable-xxxhdpi-->
+        <source-file src="src/android/res/drawable-xxxhdpi/marquee_btn_back_normal.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/marquee_btn_back_pre.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/marquee_btn_back_prebtn_rotate_normal.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/marquee_btn_back_prebtn_rotate_pre.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/marquee_btn_ok_normal.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/marquee_btn_ok_pre.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/takepic_btn_close_normal.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/takepic_btn_lightoff.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/takepic_btn_lighton.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/takepic_btn_open_pre.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/takepic_btn_takepic_normal.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <source-file src="src/android/res/drawable-xxxhdpi/takepic_btn_takepic_pre.png"
+                     target-dir="res/drawable-xxxhdpi"/>
+        <!--layout-->
+        <source-file src="src/android/res/layout/activity_editimg_view.xml"
+                     target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/activity_take_photo.xml"
+                     target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/crop_image_view.xml"
+                     target-dir="res/layout"/>
+        <source-file src="src/android/res/layout/new_tackphoto_activity_view.xml"
+                     target-dir="res/layout"/>
+        <!--values-->
+        <source-file src="src/android/res/values/attrs.xml"
+                     target-dir="res/values"/>
+        <source-file src="src/android/res/values/colors.xml"
+                     target-dir="res/values"/>
+        <source-file src="src/android/res/values/styles.xml"
+                     target-dir="res/values"/>
+    </platform>
+
+</plugin>

@@ -1,0 +1,80 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="85dp"
+        android:layout_height="match_parent"
+        android:background="#ff282828"
+        android:padding="12dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:onClick="close"
+            android:padding="12dp"
+            android:src="@drawable/ic_close_selector"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:onClick="takePhoto"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:padding="2dp"
+            android:background="@drawable/ic_takephoto_btn"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"/>
+
+        <CheckBox
+            android:id="@+id/photographs"
+            style="@style/CustomCheckboxTheme_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/blue_7"
+            android:textSize="14sp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_toLeftOf="@id/relativeLayout"
+        android:id="@+id/take_photo_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <com.qxcloud.imageprocess.operate.CameraView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cameraPreview"/>
+
+        <com.qxcloud.imageprocess.operate.FocusView
+            android:id="@+id/view_focus"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true" />
+        <!--网格参考线-->
+        <com.qxcloud.imageprocess.operate.ReferenceLine
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:text="拍照题目\n文字尽量与参考线对齐"
+        android:textColor="#ffffff"/>
+</RelativeLayout>

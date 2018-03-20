@@ -1,0 +1,19 @@
+{
+  "name": "ImageProcess",
+  "version": "1.0.1",
+  "description": "自定义相机相册选图后图片二值处理组件",
+  "cordova": {
+    "id": "cordova-plugin-image-process",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "",
+  "license": "ISC"
+}
